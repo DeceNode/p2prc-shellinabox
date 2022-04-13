@@ -7,9 +7,6 @@
       shell: |
         apt-get update
         apt-get install shellinabox
-        service shellinabox start
+        sudo service shellinabox start
         sed -i 's/4200/{{index . 0}}/' /etc/default/shellinabox
-        invoke-rc.d shellinabox restart
-      register: SEQOUT
-
-    - debug: msg={{SEQOUT.stdout_lines}}
+        sudo service shellinabox restart
