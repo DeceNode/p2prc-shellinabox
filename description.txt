@@ -1,5 +1,5 @@
 Author: Alister Luiz / Akilan Selvacoumar 
-Email: <alister email>/me@akilan.io 
+Email: alisterluiz@gmail.com / me@akilan.io 
 
 The following plugin allows a user to run shellinbox
 in p2prc.
