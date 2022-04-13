@@ -3,15 +3,13 @@
 - hosts: all
 
   tasks:
-    - name: apt install curl
-      apt:
-        name: curl
-        state: present
-    - name: setup vscode code server
-      shell: "curl -fsSL https://code-server.dev/install.sh | sh"
-      become: true
-      become_user: root
-    - name: start vscode code server
-      shell: code-server --auth none --bind-addr 0.0.0.0:{{index . 0}}
-      async: 2592000               # 60*60*24*30 – 1 month (This will keep the following command running for a month
-      poll: 0
+    - name: Running sequence of commands to setup Shellinabox and change default port (4200)
+      shell: |
+        apt-get update
+        apt-get install shellinabox
+        service shellinabox start
+        sed -i 's/4200/{{index . 0}}/' /etc/default/shellinabox
+        invoke-rc.d shellinabox restart
+      register: SEQOUT
+
+    - debug: msg={{SEQOUT.stdout_lines}}
